@@ -46,6 +46,10 @@ int Lezhandr(int a, int p){
 }
 
 
+int Yakobi(int a, int p){
+  
+}
+
 
 int main() {
   cout<<"Сколько линейных сравнений вы хотите проверить: ";
