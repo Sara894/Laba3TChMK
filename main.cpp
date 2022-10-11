@@ -47,7 +47,32 @@ int Lezhandr(int a, int p){
 
 
 int Yakobi(int a, int p){
-  
+  int res = 1;
+  if(!is_prime(a)){
+    vector<int> v = raz(a);
+    for(int i = 0; i < v.size();i++){
+      if(v[i] % p != 0 && p % v[i] != 0)
+      {
+        int st = (p-1)/ 2 * (v[i] - 1)/2;
+        res *= pow(-1,st);
+      }
+      else if(v[i] % p == 0 && p % v[i] == 0)
+      {
+        res*=0;
+        return res;
+      }
+    }
+  }else{
+    if(p % a != 0 && a != p)
+    {
+      int st = (p-1)/ 2 * (a - 1)/2;
+        res *= pow(-1,st);
+    }else{
+      res*=0;
+      return res;
+    }
+  }
+  return res;
 }
 
 
@@ -83,28 +108,26 @@ int main() {
      cout<<"Найдем значение символа Якоби "<<a <<"/"<<p<<".\n";
      vector<int> v = raz(p);
      cout<<"По определению символа Якоби "<<a <<"/"<<p<<" = ";
-     vector<int> lezhandrs; 
-     for(int i = 0; i <= v.size(); i++){
+     vector<int> lezs = {}; 
+     for(int i = 0; i < v.size(); i++){
        cout<<a<<"/"<<v[i]<<" ";
-       int tem = Lezhandr(a,v[i]);
-       lezhandrs.push_back(tem);
+       int tem = Yakobi(a,v[i]);
+       lezs.push_back(tem);
        if(i != v.size()-1)
          cout<<"* ";
      }
 
      int res = 1;
      cout<<"Найдем значение каждого из сомножителей(являющихся символами Лежандра) и вычислим так символ Якоби:\n";
-     for(int i = 0; i < lezhandrs.size();i++){
-       res*=lezhandrs[i];
+     for(int i = 0; i < lezs.size();i++){
+       res*=lezs[i];
      }
 
-      cout<<"По символ Якоби равен "<<res<<".\n";
+      cout<<"Символ Якоби равен "<<res<<".\n";
     if(res == 1)
       cout<<"Cледовательно, данное квадратичное сравнение имеет решение.\n";
     else if(res == -1)
       cout<<"Значит, данное квадратичное сравнение решений не имеет.\n";
-     
-    
    }
   }
 
